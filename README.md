@@ -1,10 +1,10 @@
 ThreeBytes
 ==========
-A simple, poorly-documented DNS tunneling PoC which sends DNS replies as
-A records of which the first byte is insignificant, in order to get around
-IP blocking.
+A simple, poorly-documented DNS tunneling PoC which sends tasking as three
+bytes of an A record (to leave the firt byte free to get around GeoIP blocking)
+and receives responses as punycode labels.
 
-The same binary is used for implant, server, and log-filter.
+The same binary is used for implant, server, and log filter.
 
 For legal use only.
 
