@@ -103,7 +103,7 @@ func handle(
 	}
 
 	/* Grab the question */
-	q := m.Questions[0].Name.String()
+	q := strings.ToLower(m.Questions[0].Name.String())
 	if 0 == len(q) {
 		return
 	}
