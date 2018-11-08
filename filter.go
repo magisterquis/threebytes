@@ -19,12 +19,12 @@ import (
 
 func filter(id string) {
 	/* Tag which means output line */
-	tag := fmt.Sprintf("[RX:%v]", id)
+	tag := fmt.Sprintf("[RX:%v]", strings.ToLower(id))
 
 	/* Process each line */
 	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {
-		l := strings.TrimSpace(scanner.Text())
+		l := strings.ToLower(strings.TrimSpace(scanner.Text()))
 		/* Extract the important bits */
 		parts := strings.SplitN(l, " ", 4)
 		if 4 != len(parts) {
