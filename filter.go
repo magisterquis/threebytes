@@ -19,19 +19,19 @@ import (
 
 func filter(id string) {
 	/* Tag which means output line */
-	tag := fmt.Sprintf("[RX:%v]", strings.ToLower(id))
+	tag := strings.ToLower(fmt.Sprintf("[RX:%v]", id))
 
 	/* Process each line */
 	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {
-		l := strings.ToLower(strings.TrimSpace(scanner.Text()))
+		l := strings.TrimSpace(scanner.Text())
 		/* Extract the important bits */
 		parts := strings.SplitN(l, " ", 4)
 		if 4 != len(parts) {
 			continue
 		}
 		/* Make sure it's a line we want */
-		if tag != parts[2] {
+		if tag != strings.ToLower(parts[2]) {
 			continue
 		}
 		/* Unquote and print the string */

@@ -103,10 +103,20 @@ func handle(
 	}
 
 	/* Grab the question */
-	q := strings.ToLower(m.Questions[0].Name.String())
+	q := m.Questions[0].Name.String()
 	if 0 == len(q) {
 		return
 	}
+
+	/* If it's to the tasking domain, use it as tasking */
+	if strings.HasSuffix(q, taskingDomain) {
+		log.Printf("Tasking: %q", q) /* DEBUG */
+		handleTasking(strings.TrimSuffix(q, taskingDomain))
+		return
+	}
+
+	/* Only want A/INET */
+	q = strings.ToLower(q)
 	if dnsmessage.TypeA != m.Questions[0].Type ||
 		dnsmessage.ClassINET != m.Questions[0].Class {
 		if dnsmessage.TypeAAAA == m.Questions[0].Type {
@@ -119,12 +129,6 @@ func handle(
 			m.Questions[0].Type,
 			m.Questions[0].Class,
 		)
-		return
-	}
-
-	/* If it's to the tasking domain, use it as tasking */
-	if strings.HasSuffix(q, taskingDomain) {
-		handleTasking(strings.TrimSuffix(q, taskingDomain))
 		return
 	}
 
